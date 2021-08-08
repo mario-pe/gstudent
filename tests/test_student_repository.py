@@ -33,7 +33,7 @@ def test_should_return_students_filtered_by_surname():
 def test_should_return_students_filtered_by_surname_specialization():
     expected_result = 1
     number_of_students = 5
-    data = {"name": "name", "specialization":"specialization"}
+    data = {"name": "name", "specialization": "specialization"}
     StudentFactory.create(name="name", specialization="specialization")
     StudentFactory.create_batch(number_of_students)
 
@@ -46,6 +46,7 @@ def test_should_create_student_object():
     data = factory.build(dict, FACTORY_CLASS=CreateUpdateStudentFactory)
 
     StudentRepository.create_user(data)
+
 
 def test_should_return_student_details():
     student = StudentFactory.create()
@@ -84,7 +85,7 @@ def test_should_remove_student_and_return_None():
 
     StudentRepository.delete_student(student.uuid)
 
-    assert number_of_students_befor_action -1 == db.session.query(Student).count()
+    assert number_of_students_befor_action - 1 == db.session.query(Student).count()
 
 
 def test_should_return_None_if_user_not_exists():

@@ -3,6 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 from gstudent.api import api
 
+
 def create_app(config_path):
     # pass
     app = Flask(__name__)

@@ -23,5 +23,3 @@ class CreateUpdateStudentFactory(factory.alchemy.SQLAlchemyModelFactory):
     name = factory.Faker("first_name")
     surname = factory.Faker("last_name")
     specialization = factory.Faker("word")
-
-
