@@ -14,3 +14,14 @@ class StudentFactory(factory.alchemy.SQLAlchemyModelFactory):
     surname = factory.Faker("last_name")
     specialization = factory.Faker("word")
 
+
+class CreateUpdateStudentFactory(factory.alchemy.SQLAlchemyModelFactory):
+    class Meta:
+        model = Student
+        sqlalchemy_session = db.session
+
+    name = factory.Faker("first_name")
+    surname = factory.Faker("last_name")
+    specialization = factory.Faker("word")
+
+

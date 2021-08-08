@@ -1,7 +1,7 @@
 from flask_restx import Namespace, Resource, fields, reqparse
 from flask_restx._http import HTTPStatus
 
-from gstudent.studentrepository import StudentRepository
+from gstudent.student_repository import StudentRepository
 
 parser = reqparse.RequestParser()
 parser.add_argument('name', location='args')
@@ -17,7 +17,13 @@ student = ns.model(
         "surname": fields.String(required=True, description="The student surname"),
         "specialization": fields.String(required=True, description="The student specialization"),
     }
-
+)
+student_create_update = ns.model(
+    "Student",{
+        "name": fields.String(required=True, description="The student name"),
+        "surname": fields.String(required=True, description="The student surname"),
+        "specialization": fields.String(required=True, description="The student specialization"),
+    }
 )
 
 
@@ -35,6 +41,7 @@ class StudentList(Resource):
 
     @ns.doc('create_student')
     @ns.marshal_list_with(student)
+    @ns.expect(student_create_update)
     def post(self):
         '''Create a new student'''
         student = StudentRepository.create_user(ns.payload)
@@ -47,14 +54,14 @@ class StudentList(Resource):
 @ns.param('uuid', 'The student identifier')
 class StudentDetails(Resource):
     @ns.doc('get_student_by_uuid')
-    @ns.response(HTTPStatus.OK, HTTPStatus.OK.description)
     @ns.response(HTTPStatus.NOT_FOUND, HTTPStatus.NOT_FOUND.description)
     @ns.marshal_with(student)
     def get(self, uuid):
         return StudentRepository.get_student_by_uuid(uuid)
 
     @ns.doc('update_student_by_uuid')
-    @ns.marshal_with(student, code=400)
+    @ns.marshal_with(student)
+    @ns.expect(student_create_update)
     def put(self, uuid):
         student = StudentRepository.update_student(uuid, ns.payload)
         return student

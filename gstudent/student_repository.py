@@ -1,6 +1,3 @@
-# from gstudent.api import api
-
-
 class StudentRepository:
     @staticmethod
     def get_students_list(params):
@@ -25,8 +22,8 @@ class StudentRepository:
 
     @staticmethod
     def get_student_by_uuid(uuid):
-        from gstudent.models import Student
         from gstudent.api import api
+        from gstudent.models import Student
         student = Student.query.filter_by(uuid=uuid).one_or_none()
         if student:
             return student
