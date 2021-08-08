@@ -1,3 +1,5 @@
+import uuid as uid
+
 class StudentRepository:
     @staticmethod
     def get_students_list(params):
@@ -9,11 +11,11 @@ class StudentRepository:
 
     @staticmethod
     def create_user(data):
-        import uuid
+
         from app import db
         from gstudent.models import Student
 
-        uuid = uuid.uuid4()
+        uuid = uid.uuid4()
         name = data["name"]
         surname = data["surname"]
         specialization = data["specialization"]
