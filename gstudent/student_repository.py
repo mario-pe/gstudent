@@ -1,3 +1,4 @@
+# from gstudent.api import api
 
 
 class StudentRepository:
@@ -25,7 +26,7 @@ class StudentRepository:
     @staticmethod
     def get_student_by_uuid(uuid):
         from gstudent.models import Student
-        from gstudent import api
+        from gstudent.api import api
         student = Student.query.filter_by(uuid=uuid).one_or_none()
         if student:
             return student
@@ -47,5 +48,6 @@ class StudentRepository:
         from app import db
         from gstudent.models import Student
         student = Student.query.filter_by(uuid=uuid).first()
-        db.session.delete(student)
-        db.session.commit()
+        if student:
+            db.session.delete(student)
+            db.session.commit()
