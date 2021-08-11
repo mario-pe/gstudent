@@ -3,3 +3,4 @@ __pycache__/
 .pytest_cache/
 test.db
 test.db-journal
+gstudent/__pycache__/

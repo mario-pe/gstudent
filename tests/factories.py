@@ -1,24 +1,23 @@
 import factory
 
-from app import db
-from gstudent.models import Student
+from database import db
+from gstudent.database.entities.student_entity import StudentEntity
 
 
 class StudentFactory(factory.alchemy.SQLAlchemyModelFactory):
     class Meta:
-        model = Student
+        model = StudentEntity
         sqlalchemy_session = db.session
 
-    uuid = factory.Faker("uuid4")
+    id = factory.Faker("uuid4")
     name = factory.Faker("first_name")
     surname = factory.Faker("last_name")
     specialization = factory.Faker("word")
 
 
-class CreateUpdateStudentFactory(factory.alchemy.SQLAlchemyModelFactory):
+class CreateUpdateStudentFactory(factory.DictFactory):
     class Meta:
-        model = Student
-        sqlalchemy_session = db.session
+        model = StudentEntity
 
     name = factory.Faker("first_name")
     surname = factory.Faker("last_name")
